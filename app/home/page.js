@@ -96,7 +96,7 @@ export default function HomePage() {
     <input type="hidden" name="clerkId" value={clerkId} />
     <input type="hidden" name="userEmail" value={userEmail} />
     <div className="flex flex-col max-h-full justify-center items-center bg-slate-200">
-     <div className="top-0 left-0 fixed p-5">
+     <div className="top-0 left-0 absolute p-5">
       <UserButton showName={true} />
      </div>
      <Image src={logo} width={100} height={100} alt="logo" />

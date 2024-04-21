@@ -54,11 +54,11 @@ export default function ReceiptCard(props) {
     <div className="mb-6 flex items-center justify-between">
      <div className="flex flex-col ">
     
-      <h1 className="text-2xl font-bold text-muted-foreground px-5 ">
-       Expense Receipts (Spending: ${receiptSum?.toFixed(2)})
+      <h1 className="text-xl md:text-2xl f text-muted-foreground px-5 ">
+       Expense Receipts: (Spending: ${receiptSum?.toFixed(2)})
       </h1>
-        <h1 className="text-2xl font-bold text-muted-foreground px-5 ">
-          Remaining Budget (Cash Flow: ${remainingBudget}) </h1>
+        <h1 className="text-xl md:text-2xl  text-muted-foreground px-5 ">
+          Remaining Budget: (Cash Flow: ${remainingBudget}) </h1>
       <p className="text-center items-center px-5 text-muted-foreground">
        Analyze your data with Budget Buddy?
       </p><div className="flex justify-center">
