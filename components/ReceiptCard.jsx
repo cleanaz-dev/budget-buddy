@@ -16,7 +16,7 @@ export default function ReceiptCard() {
       try {
         // Assume getAllReceipts is an asynchronous function that retrieves receipts
         const fetchedReceipts = await getAllReceipts();
-        console.log(fetchedReceipts);
+        // console.log(fetchedReceipts);
         setReceipts(fetchedReceipts);
       } catch (error) {
         console.error("Error fetching receipts:", error);
@@ -62,12 +62,13 @@ useEffect(() => {
           <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
            {receipt.date}
           </span>
+          <p className="bg-green-100 inline-flex py-0.5 px-2 rounded-full text- text-muted-foreground text-xs mb-2">{receipt.paymentType}</p>
           <Badge variant="success">{receipt.category}</Badge>
         </div>
       </CardHeader>
       <CardContent>
         <h3 className="text-lg font-medium">{receipt.location}</h3>
-        <p className="bg-green-100 inline-flex py-1 px-2 rounded-full text- text-muted-foreground my">{receipt.paymentType}</p>
+        
         <p className="text-gray-500 dark:text-gray-400">
           {receipt.description}
         </p>
