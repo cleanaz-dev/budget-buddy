@@ -57,7 +57,7 @@ export default function ReceiptCard() {
       </h1>
       
        <p className="text-center items-center px-5 text-muted-foreground">
-       Let Budget Buddy analyze your budget!
+       Analyze your data with Budget Buddy?
        </p>
      <div className="items-center justify-center text-center">
      <Button variant="ghost" asChild> 
