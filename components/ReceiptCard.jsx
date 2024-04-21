@@ -60,7 +60,7 @@ useEffect(() => {
       <CardHeader>
         <div className="flex items-center justify-between">
           <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-           date
+           {receipt.date}
           </span>
           <Badge variant="success">{receipt.category}</Badge>
         </div>
