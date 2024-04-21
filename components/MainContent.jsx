@@ -5,8 +5,11 @@ import Link from "next/link";
 import heroImg from "../public/Stress-bro.svg";
 import logo from "../public/logo1.png";
 
+
 export default function MainContent() {
  return (
+    <>
+  
   <div className="flex flex-col ">
    <main className="flex-1">
     <section className="w-full ">
@@ -32,12 +35,12 @@ export default function MainContent() {
         </div>
         <div className="flex flex-col gap-2 min-[400px]:flex-row">
          <Button asChild>
-          <Link className="w-auto" href="/home">
+          <Link className="w-auto" href="/sign-up">
            Sign Up for Free!
           </Link>
          </Button>
          <Button asChild variant="outline" className="bg-green-100">
-          <Link className="w-auto" href="#">
+          <Link className="w-auto" href="/sign-in">
            Learn More
           </Link>
          </Button>
@@ -136,6 +139,7 @@ export default function MainContent() {
     </section>
    </main>
   </div>
+  </>
  );
 }
 
