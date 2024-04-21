@@ -11,6 +11,7 @@ export async function POST(request) {
   const description = body.description;
   const total = body.total
   const paymentType = body.paymentType
+  const date = body.date
 
   const newReceipt = await prisma.receipts.create({
    data: {
@@ -19,7 +20,8 @@ export async function POST(request) {
     imgUrl,
     description,
     total,
-    paymentType
+    paymentType,
+    date
    },
   });
 

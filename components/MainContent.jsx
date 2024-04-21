@@ -12,9 +12,10 @@ export default function MainContent() {
     <section className="w-full ">
      <div className="flex flex-col justify-center items-center text-center w-auto bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-yellow-200 via-green-200 to-green-300 rounded-xl mb-8 py-2">
       <Image src={logo} width={200} height={200} />
-      <h1 className=" text-2xl lg:text-4xl font-bold  py-2 px-3 text-muted-foreground ">
+      <h1 className=" text-2xl lg:text-4xl font-extrabold  py-2 px-3 text-muted-foreground tracking-widest">budget buddy</h1>
+      <h2 className=" text-md lg:text-lg  pb-2 px-3 text-gray-700/50 ">
        budget. set. simple.
-      </h1>
+      </h2>
       
      </div>
      <div className="container px-4 md:px-6">
