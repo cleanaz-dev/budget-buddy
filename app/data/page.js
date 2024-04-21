@@ -13,7 +13,7 @@ export default function DataPage() {
     <div className="flex flex-col h-screen justify-center items-center bg-slate-200">
     
         <Image src={logo} width={100} height={100} />
-     
+     <p className='text-muted-foregroun' >coming. soon.</p>
       <RecieptSummary />
     </div>
     </>
