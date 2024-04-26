@@ -83,3 +83,33 @@
       5px 1px 0 #DCFCE7,
       5px 1px 0 #DCFCE7; /* Adjust these values as needed */
   }
+
+  .expense-heading {
+    font-size: 1.25rem; /* Adjust font size as needed */
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+  
+  .expense-list {
+    list-style: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .expense-item {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .budget-info {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .expense-report {
+    /* Add your desired styles here */
+    border: 1px solid #ddd; /* Example border */
+    padding: 1rem; /* Example padding */
+    margin: 0 auto; /* Center the report horizontally */
+    max-width: 600px; /* Optional maximum width */
+  }

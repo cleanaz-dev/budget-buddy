@@ -4,7 +4,13 @@ import { SubmitButton } from "../../components/SubmitButton";
 import { SingleImageDropzone } from "../../components/SingleImage";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
-
+import { cn } from "../../lib/utils";
+import { Calendar } from "../../components/ui/calendar";
+import {
+ Popover,
+ PopoverContent,
+ PopoverTrigger,
+} from "../../components/ui/popover";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useEdgeStore } from "../../lib/edgestore";
@@ -13,11 +19,22 @@ import ReceiptCard from "../../components/ReceiptCard";
 import { Card } from "../../components/ui/card";
 import { Textarea } from "../../components/ui/textarea";
 import { Progress } from "../../components/ui/progress";
+import {
+ Select,
+ SelectTrigger,
+ SelectValue,
+ SelectContent,
+ SelectItem,
+} from "../../components/ui/select";
+import { Button } from "../../components/ui/button";
+
 import Image from "next/image";
 import logo from "../../public/logo1.png";
-import { useFormStatus } from "react-dom";
-import { UserButton, useUser } from "@clerk/nextjs";
-import { set } from "zod";
+
+import { useUser } from "@clerk/nextjs";
+
+import { addDays, format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
 
 export default function HomePage() {
  const { edgestore } = useEdgeStore();
@@ -28,6 +45,7 @@ export default function HomePage() {
  const [clerkId, setClerkId] = useState("");
  const [imageUrl, setImageUrl] = useState("");
  const [progressBar, setProgressBar] = useState(null);
+ const [date, setDate] = useState("");
 
  useEffect(() => {
   if (user) {
@@ -47,14 +65,11 @@ export default function HomePage() {
 
  const handleUpload = async (FormData) => {
   const category = FormData.get("category");
-  
   const location = FormData.get("location");
-  
   const description = FormData.get("description");
-  
   const date = FormData.get("date");
-  const clerkId = FormData.get("clerkId")
-  const userEmail = FormData.get("userEmail")
+  const clerkId = FormData.get("clerkId");
+  const userEmail = FormData.get("userEmail");
   if (file) {
    const res = await edgestore.publicFiles.upload({
     file,
@@ -69,17 +84,18 @@ export default function HomePage() {
 
    const fileSize = file.size;
    const fileType = file.type;
+   const formattedDate = format(new Date(date), "MM-dd-yyyy");
 
    const receiptData = {
     imageUrl,
     category,
     location,
     description,
-    date,
+    formattedDate,
     fileSize,
     fileType,
     clerkId,
-    userEmail
+    userEmail,
    };
 
    await uploadPhoto(receiptData);
@@ -95,15 +111,10 @@ export default function HomePage() {
    <form action={handleUpload}>
     <input type="hidden" name="clerkId" value={clerkId} />
     <input type="hidden" name="userEmail" value={userEmail} />
+    <input type="hidden" name="date" value={date} />
     <div className="flex flex-col max-h-full justify-center items-center bg-slate-200">
-     <div className="top-0 left-0 absolute p-5">
-      <UserButton showName={true} />
-     </div>
      <Image src={logo} width={100} height={100} alt="logo" />
-     <h1 className="text-muted-foreground">
-      {" "}
-      Receipt. Upload. Click. Done.
-     </h1>
+     <h1 className="text-muted-foreground"> Receipt. Upload. Click. Done.</h1>
      <h1 className="mb-10 text-muted-foreground font-thin px-2 py-0.5 bg-slate-100 rounded-lg">
       {" "}
       Default Budget = $300
@@ -112,7 +123,19 @@ export default function HomePage() {
       <div className="flex flex-col gap-y-4">
        <div>
         <Label className="text-muted-foreground">Category</Label>
-        <Input placeholder="Enter category here" name="category" />
+        <Select name="category">
+         <SelectTrigger>
+          <SelectValue placeholder="Select category" />
+         </SelectTrigger>
+         <SelectContent>
+          <SelectItem value="Transportation">Transportation</SelectItem>
+          <SelectItem value="Groceries">Groceries</SelectItem>
+          <SelectItem value="Shopping">Shopping</SelectItem>
+          <SelectItem value="Bills">Bills</SelectItem>
+          <SelectItem value="Entertainment">Entertainment</SelectItem>
+          <SelectItem value="Other">Other</SelectItem>
+         </SelectContent>
+        </Select>
        </div>
        <div>
         <Label className="text-muted-foreground">Location</Label>
@@ -125,9 +148,42 @@ export default function HomePage() {
          name="description"
         />
        </div>
-       <div>
-        <Label className="text-muted-foreground">Date</Label>
-        <Input placeholder="MM-DD-YYYY" name="date" />
+       <div className="flex flex-col">
+        <Label className="text-muted-foreground mb-1">Date</Label>
+        <Popover>
+         <PopoverTrigger asChild>
+          <Button
+           variant={"outline"}
+           className={cn(
+            "w-full justify-start text-left font-normal",
+            !date && "text-muted-foreground"
+           )}
+          >
+           <CalendarIcon className="mr-2 h-4 w-4" />
+           {date ? format(date, "PPP") : <span>Pick a date</span>}
+          </Button>
+         </PopoverTrigger>
+         <PopoverContent className="flex w-auto flex-col space-y-2 p-2">
+          <Select
+           onValueChange={(value) =>
+            setDate(addDays(new Date(), parseInt(value)))
+           }
+          >
+           <SelectTrigger>
+            <SelectValue placeholder="Select" />
+           </SelectTrigger>
+           <SelectContent position="popper">
+            <SelectItem value="0">Today</SelectItem>
+            {/* <SelectItem value="1">Tomorrow</SelectItem>
+            <SelectItem value="3">In 3 days</SelectItem>
+            <SelectItem value="7">In a week</SelectItem> */}
+           </SelectContent>
+          </Select>
+          <div className="rounded-md border">
+           <Calendar mode="single" selected={date} onSelect={setDate} />
+          </div>
+         </PopoverContent>
+        </Popover>
        </div>
        <SingleImageDropzone
         className="bg-green-50 hover:bg-slate-50"

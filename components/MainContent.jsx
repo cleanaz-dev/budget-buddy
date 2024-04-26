@@ -4,6 +4,7 @@ import { Card, CardContent } from "./ui/card";
 import Link from "next/link";
 import heroImg from "../public/Stress-bro.svg";
 import logo from "../public/logo1.png";
+import { SignedIn, SignedOut } from "@clerk/nextjs";
 
 
 export default function MainContent() {
@@ -14,7 +15,7 @@ export default function MainContent() {
    <main className="flex-1">
     <section className="w-full ">
      <div className="flex flex-col justify-center items-center text-center w-auto bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-yellow-200 via-green-200 to-green-300 rounded-xl mb-8 py-2">
-      <Image src={logo} width={200} height={200} />
+      <Image src={logo} width={200} height={200} alt="logo" priority/>
       <h1 className=" text-2xl lg:text-4xl font-extrabold  py-2 px-3 text-muted-foreground tracking-widest">budget buddy</h1>
       <h2 className=" text-md lg:text-lg  pb-2 px-3 text-gray-700/50 ">
        budget. set. simple.
@@ -33,6 +34,7 @@ export default function MainContent() {
           into your financial health.
          </p>
         </div>
+        <SignedOut >
         <div className="flex flex-col gap-2 min-[400px]:flex-row">
          <Button asChild>
           <Link className="w-auto" href="/sign-up">
@@ -41,10 +43,21 @@ export default function MainContent() {
          </Button>
          <Button asChild variant="outline" className="bg-green-100">
           <Link className="w-auto" href="/sign-in">
-           Learn More
+           Sign In
           </Link>
          </Button>
         </div>
+        </SignedOut>
+        <SignedIn >
+        <div className="flex flex-col gap-2 min-[400px]:flex-row">
+         <Button asChild>
+          <Link className="w-auto" href="/home">
+           Take control of your Budget Now!
+          </Link>
+         </Button>
+        
+        </div>
+        </SignedIn>
        </div>
        <Image
         alt="Hero"

@@ -1,4 +1,4 @@
-import { connect } from "http2";
+
 import prisma from "../../../lib/db";
 
 export async function POST(request) {
@@ -9,7 +9,7 @@ export async function POST(request) {
     const { category, location, imgUrl, description, total, paymentType, date, clerkId, userEmail, fileSize, fileType } = body;
 
     const findFirstUser = await prisma.user.findFirst({
-      where: { clerkId},
+      where: { clerkId },
       select: { id: true }
     });
 

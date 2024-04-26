@@ -90,13 +90,14 @@ export default function ReceiptCard(props) {
        {/* Assuming each receipt has a unique identifier */}
        <CardHeader>
         <div className="flex items-center justify-between">
-         <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-          {receipt.date}
-         </span>
+         
          <p className="bg-green-100 inline-flex py-0.5 px-2 rounded-full text- text-muted-foreground text-xs mb-2">
           {receipt.paymentType}
          </p>
          <Badge variant="success">{receipt.category}</Badge>
+         <span className="text-sm font-medium text-gray-500 dark:text-gray-400 text-right">
+          {receipt.date}
+         </span>
         </div>
        </CardHeader>
        <CardContent>
