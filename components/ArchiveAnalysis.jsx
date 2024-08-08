@@ -30,10 +30,10 @@ export default function ArchiveAnalysis({analysisId}) {
         </DialogTrigger>
         <DialogContent className="max-w-[425px] md:max-w-[600px]">
           <DialogHeader>
-            <DialogTitle>Delete Analysis</DialogTitle>
+            <DialogTitle>Archive Report</DialogTitle>
             <DialogDescription>
               <div className="space-y-2">
-                <h1>Archive the following Analysis?</h1>
+                <h1>Archive the following report?</h1>
                 <p className="font-semibold">{analysisId}</p>
               </div>
             </DialogDescription>
