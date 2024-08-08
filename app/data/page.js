@@ -2,6 +2,7 @@ import React from "react";
 import RecieptSummary from "../../components/RecieptSummary";
 import Image from "next/image";
 import logo from "../../public/logo1.png";
+import aiImage from "../../public/ai-amico.png";
 import { Button } from "../../components/ui/button";
 import { Badge } from "../../components/ui/badge";
 import {
@@ -28,9 +29,13 @@ export default async function DataPage() {
   <>
    <div className="flex flex-col min-h-[100vh] h-auto justify-center items-center bg-slate-200">
     <Image src={logo} width={100} height={100} alt="logo" priority />
+    <h1 className="text-2xl">AI Assistant</h1>
 
+    
+    <div>
+      <Image src={aiImage} width={200} height={200} alt="ai" priority className="animate-pulse"/>
+    </div>
     <RecieptSummary clerkId={clerkId} />
-
     {budgetBuddyAnalysis
      .filter((analysis) => !analysis.isArchived)
      .map((analysis) => (

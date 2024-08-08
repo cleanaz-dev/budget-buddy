@@ -64,6 +64,26 @@ export function DeleteAnalysisButton() {
   )
 }
 
+export function DeleteReceiptButton() {
+  const { pending } = useFormStatus();
+  return (
+    <>
+    {pending ? (
+        <Button disabled className="">
+          <Loader2Icon className="w-4 h-4 animate-spin" />
+        </Button>
+      ) : (
+        <Button
+          type="submit"
+          className="bg-red-50 text-red-700 hover:bg-red-700 hover:text-white"
+        >
+          Delete
+        </Button>
+      )}
+    </>
+  )
+}
+
 export function ArchiveAnalysisButton() {
   const { pending } = useFormStatus();
 
@@ -79,6 +99,26 @@ export function ArchiveAnalysisButton() {
           className="bg-green-50 text-green-700 hover:bg-green-700 hover:text-white"
         >
           Archive
+        </Button>
+      )}
+    </>
+  )
+}
+
+export function UpdateUserDetailsButton() {
+  const { pending } = useFormStatus();
+  return (
+    <>
+    {pending ? (
+        <Button disabled className="">
+          <Loader2Icon className="w-4 h-4 animate-spin" />
+        </Button>
+      ) : (
+        <Button
+          type="submit"
+          className="bg-green-50 text-green-700 hover:bg-slate-50"
+        >
+          Save
         </Button>
       )}
     </>

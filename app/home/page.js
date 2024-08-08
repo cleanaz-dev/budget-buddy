@@ -1,5 +1,6 @@
 "use client";
 
+
 import { SubmitButton } from "../../components/SubmitButton";
 import { SingleImageDropzone } from "../../components/SingleImage";
 import { Input } from "../../components/ui/input";
@@ -11,6 +12,7 @@ import {
  PopoverContent,
  PopoverTrigger,
 } from "../../components/ui/popover";
+
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useEdgeStore } from "../../lib/edgestore";
@@ -35,6 +37,7 @@ import { useUser } from "@clerk/nextjs";
 
 import { addDays, format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
+import { getUserDetails } from "../../lib/actions";
 
 export default function HomePage() {
  const { edgestore } = useEdgeStore();
@@ -61,7 +64,8 @@ export default function HomePage() {
   return <div>Loading...</div>;
  }
 
- //  const { pending } = useFormStatus();
+ 
+ 
 
  const handleUpload = async (FormData) => {
   const category = FormData.get("category");
@@ -107,18 +111,16 @@ export default function HomePage() {
  return (
   <>
    {progressBar !== null && <Progress value={progressBar} />}
+   
 
    <form action={handleUpload}>
     <input type="hidden" name="clerkId" value={clerkId} />
     <input type="hidden" name="userEmail" value={userEmail} />
     <input type="hidden" name="date" value={date} />
-    <div className="flex flex-col max-h-full justify-center items-center bg-slate-200">
+    <div className="flex flex-col min-h-full max-h-full justify-center items-center bg-slate-200">
      <Image src={logo} width={100} height={100} alt="logo" />
-     <h1 className="text-muted-foreground"> Receipt. Upload. Click. Done.</h1>
-     <h1 className="mb-10 text-muted-foreground font-thin px-2 py-0.5 bg-slate-100 rounded-lg">
-      {" "}
-      Default Budget = $300
-     </h1>
+     <h1 className="text-muted-foreground mb-6"> Receipt. Upload. Click. Done.</h1>
+     
      <Card className="flex bg-white p-10 rounded-2xl">
       <div className="flex flex-col gap-y-4">
        <div>

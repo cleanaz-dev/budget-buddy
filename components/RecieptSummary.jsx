@@ -8,8 +8,6 @@ import { ReceiptDataButton } from './SubmitButton'
 
 export default async function RecieptSummary(props) {
   const { clerkId } = props
-  
-  console.log(clerkId)
  
   return (
     <div>
