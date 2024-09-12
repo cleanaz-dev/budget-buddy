@@ -113,3 +113,17 @@
     margin: 0 auto; /* Center the report horizontally */
     max-width: 600px; /* Optional maximum width */
   }
+
+  .receipt-details {
+    overflow: hidden;
+    transition: max-height 0.3s ease-out
+    ;
+  }
+  
+  .receipt-details.collapsed {
+    max-height: 0;
+  }
+  
+  .receipt-details.expanded {
+    max-height: 500px; /* Adjust this value based on your maximum content height */
+  }

@@ -1,43 +1,43 @@
 "use client";
 
 
-import { SubmitButton } from "../../components/SubmitButton";
-import { SingleImageDropzone } from "../../components/SingleImage";
-import { Input } from "../../components/ui/input";
-import { Label } from "../../components/ui/label";
-import { cn } from "../../lib/utils";
-import { Calendar } from "../../components/ui/calendar";
+import { SubmitButton } from "../../../components/SubmitButton";
+import { SingleImageDropzone } from "../../../components/SingleImage";
+import { Input } from "../../../components/ui/input";
+import { Label } from "../../../components/ui/label";
+import { cn } from "../../../lib/utils";
+import { Calendar } from "../../../components/ui/calendar";
 import {
  Popover,
  PopoverContent,
  PopoverTrigger,
-} from "../../components/ui/popover";
+} from "../../../components/ui/popover";
 
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useEdgeStore } from "../../lib/edgestore";
-import { uploadPhoto } from "../../lib/actions";
-import ReceiptCard from "../../components/ReceiptCard";
-import { Card } from "../../components/ui/card";
-import { Textarea } from "../../components/ui/textarea";
-import { Progress } from "../../components/ui/progress";
+import { useEdgeStore } from "../../../lib/edgestore";
+import { uploadPhoto } from "../../../lib/actions";
+import ReceiptCard from "../../../components/ReceiptCard";
+import { Card } from "../../../components/ui/card";
+import { Textarea } from "../../../components/ui/textarea";
+import { Progress } from "../../../components/ui/progress";
 import {
  Select,
  SelectTrigger,
  SelectValue,
  SelectContent,
  SelectItem,
-} from "../../components/ui/select";
-import { Button } from "../../components/ui/button";
+} from "../../../components/ui/select";
+import { Button } from "../../../components/ui/button";
 
 import Image from "next/image";
-import logo from "../../public/logo1.png";
+import logo from "../../../public/logo1.png";
 
 import { useUser } from "@clerk/nextjs";
 
 import { addDays, format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
-import { getUserDetails } from "../../lib/actions";
+import { getUserDetails } from "../../../lib/actions";
 
 export default function HomePage() {
  const { edgestore } = useEdgeStore();
@@ -117,7 +117,7 @@ export default function HomePage() {
     <input type="hidden" name="clerkId" value={clerkId} />
     <input type="hidden" name="userEmail" value={userEmail} />
     <input type="hidden" name="date" value={date} />
-    <div className="flex flex-col min-h-full max-h-full justify-center items-center bg-slate-200">
+    <div className="flex flex-col min-h-full max-h-full justify-center items-center bg-slate-200 mt-10 pt-10">
      <Image src={logo} width={100} height={100} alt="logo" />
      <h1 className="text-muted-foreground mb-6"> Receipt. Upload. Click. Done.</h1>
      
@@ -196,7 +196,7 @@ export default function HomePage() {
          setFile(file);
         }}
        />
-       <SubmitButton />
+       {file && <SubmitButton />}
       </div>
      </Card>
      <ReceiptCard clerkId={clerkId} userEmail={userEmail} />

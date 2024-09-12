@@ -1,10 +1,10 @@
 import React from "react";
-import RecieptSummary from "../../components/RecieptSummary";
+import RecieptSummary from "../../../components/RecieptSummary";
 import Image from "next/image";
-import logo from "../../public/logo1.png";
-import aiImage from "../../public/ai-amico.png";
-import { Button } from "../../components/ui/button";
-import { Badge } from "../../components/ui/badge";
+import logo from "../../../public/logo1.png";
+import aiImage from "../../../public/ai-amico.png";
+import { Button } from "../../../components/ui/button";
+import { Badge } from "../../../components/ui/badge";
 import {
  AtomIcon,
  Brain,
@@ -16,9 +16,9 @@ import { currentUser } from "@clerk/nextjs/server";
 import {
  getBudgetBuddyAnalysis,
  getReceiptDataForWebhook,
-} from "../../lib/actions";
-import DeleteAnalysis from "../../components/DeleteAnalysis";
-import ArchiveAnalysis from "../../components/ArchiveAnalysis";
+} from "../../../lib/actions";
+import DeleteAnalysis from "../../../components/DeleteAnalysis";
+import ArchiveAnalysis from "../../../components/ArchiveAnalysis";
 
 export default async function DataPage() {
  const user = await currentUser();

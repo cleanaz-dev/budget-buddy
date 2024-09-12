@@ -1,31 +1,27 @@
 import React from "react";
-import logo from "../../public/logo1.png";
+import logo from "../../../public/logo1.png";
 import Image from "next/image";
 import {
  Card,
  CardContent,
  CardFooter,
  CardHeader,
-} from "../../components/ui/card";
-import {
- Avatar,
- AvatarFallback,
- AvatarImage,
-} from "../../components/ui/avatar";
-import { Separator } from "../../components/ui/separator";
-import { Label } from "../../components/ui/label";
-import { Input } from "../../components/ui/input";
+} from "../../../components/ui/card";
+
+import { Separator } from "../../../components/ui/separator";
+import { Label } from "../../../components/ui/label";
+import { Input } from "../../../components/ui/input";
 import {
  Select,
  SelectContent,
  SelectItem,
  SelectTrigger,
  SelectValue,
-} from "../../components/ui/select";
-import { Button } from "../../components/ui/button";
+} from "../../../components/ui/select";
+import { Button } from "../../../components/ui/button";
 import { currentUser } from "@clerk/nextjs/server";
-import { getUserDetails, updateUserDetails } from "../../lib/actions";
-import { UpdateUserDetailsButton } from "../../components/SubmitButton";
+import { getUserDetails, updateUserDetails } from "../../../lib/actions";
+import { UpdateUserDetailsButton } from "../../../components/SubmitButton";
 import { Mail, UserCircle } from "lucide-react";
 
 export default async function userInfo() {
@@ -36,7 +32,7 @@ export default async function userInfo() {
  const { name, email, budget, accountType, budgetCycle } = userDetails;
 
  return (
-  <div className="flex flex-col min-h-[100vh] h-auto justify-center items-center bg-slate-200">
+  <div className="flex flex-col min-h-screen justify-center items-center bg-slate-200">
    <form action={updateUserDetails}>
     <input type="hidden" name="clerkId" value={clerkId} />
     <div className="flex flex-col items-center mb-4 justify-between">

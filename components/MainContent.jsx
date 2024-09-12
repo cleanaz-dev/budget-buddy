@@ -5,7 +5,7 @@ import Link from "next/link";
 import heroImg from "../public/Stress-bro.svg";
 import logo from "../public/logo1.png";
 import { SignedIn, SignedOut } from "@clerk/nextjs";
-
+import Footer from "./Footer"
 
 export default function MainContent() {
  return (
@@ -29,7 +29,7 @@ export default function MainContent() {
          <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
           Take control of your <span className="text-green-100">finances</span>
          </h1>
-         <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
+         <p className="max-w-[600px] text-green-100 md:text-xl dark:text-gray-400">
           Effortlessly track your expenses, create budgets, and gain insights
           into your financial health.
          </p>
@@ -150,6 +150,7 @@ export default function MainContent() {
       </div>
      </div>
     </section>
+    <Footer />
    </main>
   </div>
   </>

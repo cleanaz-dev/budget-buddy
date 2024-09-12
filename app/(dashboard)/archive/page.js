@@ -1,7 +1,7 @@
 import React from "react";
 
 import { auth } from "@clerk/nextjs/server";
-import { getAllAnalysisById } from "../../lib/actions";
+import { getAllAnalysisById } from "../../../lib/actions";
 import {
  Card,
  CardContent,
@@ -9,10 +9,10 @@ import {
  CardHeader,
  CardFooter,
  CardTitle,
-} from "../../components/ui/card";
-import logo from "../../public/logo1.png";
+} from "../../../components/ui/card";
+import logo from "../../../public/logo1.png";
 import Image from "next/image";
-import DeleteAnalysis from "../../components/DeleteAnalysis";
+import DeleteAnalysis from "../../../components/DeleteAnalysis";
 import { Star } from "lucide-react";
 
 export default async function ArchivePage() {
@@ -29,7 +29,7 @@ export default async function ArchivePage() {
    
    {analysis.length === 0 && <p>No archived reports found.</p>}
    {analysis.map((item) => (
-    <Card key={item.id} className="max-w-3xl px-4 bg-gradient-to-tr from-white to-green-50">
+    <Card key={item.id} className="max-w-3xl px-2 md:px-4 bg-gradient-to-tr from-white to-green-50">
      <CardHeader>
       <div className="flex justify-between">
        <p>{item.id}</p>

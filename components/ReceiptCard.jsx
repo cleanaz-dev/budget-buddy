@@ -10,25 +10,17 @@ import {
  DialogTitle,
  DialogTrigger,
  DialogFooter,
- DialogClose
+ DialogClose,
 } from "./ui/dialog";
 
 import { Input } from "./ui/input";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
-import {
- Table,
- TableBody,
- TableCaption,
- TableCell,
- TableHead,
- TableHeader,
- TableRow,
-} from "./ui/table";
+
+
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { Card, CardHeader, CardContent, CardFooter } from "./ui/card";
 import {
-  deleteSingleReceipt,
+ deleteSingleReceipt,
  getAllReceipts,
  getUserDetails,
  getUserReceipts,
@@ -41,8 +33,14 @@ import {
  DeleteIcon,
  EyeIcon,
  Trash,
+ ChevronDown,
+ ChevronUp,
+ CreditCardIcon,
+ MapPinnedIcon,
+ TagIcon
 } from "lucide-react";
 import { DeleteReceiptButton } from "./SubmitButton";
+import { Separator } from "./ui/separator";
 
 export default function ReceiptCard(props) {
  const { clerkId, userEmail } = props;
@@ -50,6 +48,12 @@ export default function ReceiptCard(props) {
  const [receipts, setReceipts] = useState([]);
  const [receiptSum, setReceiptSum] = useState(0);
  const [userDetails, setUserDetails] = useState([]);
+ const [expandedReceipts, setExpandedReceipts] = useState({});
+
+ const toggleExpand = (id) => {
+  setExpandedReceipts(prev => ({...prev, [id]: !prev[id]}));
+ };
+
  useEffect(() => {
   const fetchReceipts = async () => {
    try {
@@ -105,20 +109,18 @@ export default function ReceiptCard(props) {
     <div className="mb-6">
      <div className="">
       <div className="flex flex-col gap-2 mb-6 text-center justify-center border-2 border-slate-100 rounded-md bg-slate-100 py-2">
-       
-        <p className="text-xl md:text-2xl text-muted-foreground px-5 font-bold ">
-         Receipts: {receipts?.length}
-        </p>
-        <p className="text-xl md:text-2xl  text-muted-foreground px-5 font-bold ">
-         Budget: $ {userBudget}
-        </p>
-        <p className="text-xl md:text-2xl text-muted-foreground px-5 ">
-         Spending: $ {receiptSum?.toFixed(2)}
-        </p>
-        <p className="text-xl md:text-2xl text-muted-foreground px-5 ">
-         Cash Flow: $ {remainingBudget}{" "}
-        </p>
-     
+       <p className="text-xl md:text-2xl text-muted-foreground px-5 font-bold ">
+        Receipts: {receipts?.length}
+       </p>
+       <p className="text-xl md:text-2xl  text-muted-foreground px-5 font-bold ">
+        Budget: $ {userBudget}
+       </p>
+       <p className="text-xl md:text-2xl text-muted-foreground px-5 ">
+        Spending: $ {receiptSum?.toFixed(2)}
+       </p>
+       <p className="text-xl md:text-2xl text-muted-foreground px-5 ">
+        Cash Flow: $ {remainingBudget}{" "}
+       </p>
       </div>
       <div className="text-center">
        <p className="text-center items-center px-5 text-muted-foreground">
@@ -146,70 +148,82 @@ export default function ReceiptCard(props) {
       </div>
      </div>
     </div>
-    <div className="flex flex-col  gap-y-4">
+    <div className="flex flex-col gap-y-4 ">
      {receipts?.map((receipt) => (
       <Card
-       className="bg-gradient-to-tr from-white to-green-100/50"
+       className="bg-gradient-to-tr from-white to-green-100/50 md:min-w-[500px]"
        key={receipt.id}
       >
-       <CardHeader >
-        <div className="flex  justify-between">
-         <p className="bg-green-100 inline-flex py-0.5 px-2 rounded-full text- text-muted-foreground text-xs mb-2">
+       <CardHeader>
+        <div className="flex justify-between items-center">
+         <p className=" inline-flex py-0.5 px-2 rounded-full text-muted-foreground text-xs min-w-24">
           {receipt.paymentType}
          </p>
-         <Badge variant="success">{receipt.category}</Badge>
-         <span className="text-sm font-medium text-gray-500 dark:text-gray-400 text-right">
-          {receipt.date}
-         </span>
+         <span className="text-sm font-medium text-gray-500">{receipt.total}</span>
+         <span className="text-sm font-medium text-gray-500 text-right">{receipt.date}</span>
+         <Button 
+          variant="ghost" 
+          size="sm" 
+          onClick={() => toggleExpand(receipt.id)}
+         >
+          {expandedReceipts[receipt.id] ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+         </Button>
         </div>
        </CardHeader>
-       <CardContent>
-        <div className="flex items-center justify-between">
-         <div>
-          <h3 className="text-lg font-medium">{receipt.location}</h3>
-          <p className="text-gray-500 dark:text-gray-400">
-           {receipt.description}
-          </p>
+       <div className={`receipt-details ${expandedReceipts[receipt.id] ? 'expanded' : 'collapsed'}`}>
+        <CardContent>
+         <Separator className="my-2" />
+         <div className="flex justify-between mb-2">
+          <div>
+           <h3 className="text-sm md:text-lg font-medium">{receipt.location}</h3>
+           <p className="text-xs md:text-base text-gray-400 font-thin">
+            {receipt.description}
+           </p>
+          </div>
+          <Badge variant="success" className="bg-white">{receipt.category}</Badge>
          </div>
-
-         <div className="flex items-center gap-2">
-          <span className="text-lg font-medium">{receipt.total}</span>
-          <Button size="sm" variant="outline" className="" asChild>
-           <Link href={receipt.imgUrl}><EyeIcon size={20}/></Link>
+         <Separator className="my-2" />
+         <div className="flex items-center gap-2 justify-end mt-4 px-2">
+          <div className="flex-1 text-left">Remaining Budget: ${receipt.remainingBudget}</div>
+          <Button size="sm" variant="outline" asChild>
+           <Link href={receipt.imgUrl}>
+            <EyeIcon size={20} />
+           </Link>
           </Button>
-         
+          
           <Dialog>
            <DialogTrigger asChild>
-            <Button variant="secondary"><Trash /></Button>
+            <Button variant="outline" size="sm" className="hover:bg-rose-500">
+             <Trash size={20} />
+            </Button>
            </DialogTrigger>
            <DialogContent>
             <p>Are you sure you want to delete this receipt?</p>
             <form action={deleteSingleReceipt}>
-            <Input
+             <Input
               name="receiptId"
               value={receipt.id}
               className="col-span-3 border-none"
               type="hidden"
-            />
-            <div className="flex gap-2">
+             />
+             <div className="flex gap-2">
+              <p>{receipt.location}</p>
 
-            <p>{receipt.location}</p>
-            
-            <p>{receipt.description}</p>
+              <p>{receipt.description}</p>
 
-            <p>{receipt.total}</p>
-            </div>
-            <DialogFooter>
+              <p>{receipt.total}</p>
+             </div>
+             <DialogFooter>
               <DialogClose>
-                <DeleteReceiptButton />
+               <DeleteReceiptButton />
               </DialogClose>
-            </DialogFooter>
-          </form>
+             </DialogFooter>
+            </form>
            </DialogContent>
-          </Dialog>
+           </Dialog>
          </div>
-        </div>
-       </CardContent>
+        </CardContent>
+       </div>
       </Card>
      ))}
     </div>
