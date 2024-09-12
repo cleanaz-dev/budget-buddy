@@ -69,7 +69,7 @@ export default function MainContent() {
       </div>
      </div>
     </section>
-    <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800 rounded-lg">
+    <section className="w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800 rounded-lg mt-10">
      <div className="container px-4 md:px-6">
       <div className="grid gap-6 lg:grid-cols-3 ">
        <div className="flex flex-col items-center justify-center space-y-4 text-center">
