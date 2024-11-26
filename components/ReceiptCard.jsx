@@ -39,6 +39,7 @@ import {
  MapPinnedIcon,
  TagIcon
 } from "lucide-react";
+
 import { DeleteReceiptButton } from "./SubmitButton";
 import { Separator } from "./ui/separator";
 
@@ -102,6 +103,8 @@ export default function ReceiptCard(props) {
  const userBudget = userDetails.budget;
 
  const remainingBudget = (userBudget - receiptSum).toFixed(2);
+
+
 
  return (
   <div>

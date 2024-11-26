@@ -71,14 +71,14 @@ export default async function DataPage() {
            {analysis.remainingBudget}
           </p>
          </div>
-         <div>
+         <div className="pb-2 ">
           <h1 className="mb-[-20px] font-bold">Summary</h1>
           <p style={{ whiteSpace: "pre-wrap" }} className="leading-0">
            {analysis.summary}
           </p>
          </div>
         </div>
-        <div className="flex space-x-4 justify-end">
+        <div className="flex space-x-4 justify-end pb-2">
         <ArchiveAnalysis analysisId={analysis.id} />
          <DeleteAnalysis analysisId={analysis.id} />
         </div>

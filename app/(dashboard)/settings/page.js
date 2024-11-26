@@ -32,7 +32,7 @@ export default async function userInfo() {
  const { name, email, budget, accountType, budgetCycle } = userDetails;
 
  return (
-  <div className="flex flex-col min-h-screen justify-center items-center bg-slate-200">
+  <div className="flex flex-col min-h-screen justify-center items-center bg-slate-200 mt-10 md:mt-0">
    <form action={updateUserDetails}>
     <input type="hidden" name="clerkId" value={clerkId} />
     <div className="flex flex-col items-center mb-4 justify-between">

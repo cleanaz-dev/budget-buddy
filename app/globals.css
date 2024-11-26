@@ -4,7 +4,7 @@
 
   @layer base {
     :root {
-      --background: 0 0% 100%;
+      --background: 214 31.8% 91.4%;
       --foreground: 222.2 84% 4.9%;
 
       --card: 0 0% 100%;
@@ -126,4 +126,8 @@
   
   .receipt-details.expanded {
     max-height: 500px; /* Adjust this value based on your maximum content height */
+  }
+
+  .body {
+    background-color: #e2e8f0;
   }

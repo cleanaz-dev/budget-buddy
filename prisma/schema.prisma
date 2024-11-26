@@ -24,20 +24,31 @@ model User {
 
   accountType accountType? @default(Personal)
   budgetCycle budgetCycle?
+
+  stripeCustomerId   String?
+  subscriptionStatus SubscriptionStatus @default(TRIAL)
+  subscriptionTier   SubscriptionTier   @default(TRIAL)
+  trialEndsAt        DateTime?
+  subscriptionEndsAt DateTime?
+  receiptCount       Int                @default(0)
+  maxReceipts        Int                @default(10) // Will change based on tier
 }
 
 model Receipts {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
-  category    String?
-  location    String?
-  description String?
-  total       String?
-  imgUrl      String
-  paymentType String?
-  date        String?
+  id              String  @id @default(auto()) @map("_id") @db.ObjectId
+  category        String?
+  location        String?
+  description     String?
+  total           String?
+  imgUrl          String
+  paymentType     String?
+  date            String?
   remainingBudget Float?
-  User        User?   @relation(fields: [userId], references: [id])
-  userId      String? @db.ObjectId
+  User            User?   @relation(fields: [userId], references: [id])
+  userId          String? @db.ObjectId
+
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
 }
 
 model BudgetBuddy {
@@ -62,4 +73,19 @@ enum accountType {
 enum budgetCycle {
   Weekly
   Monthly
+}
+
+enum SubscriptionStatus {
+  TRIAL
+  ACTIVE
+  PAST_DUE
+  CANCELLED
+  EXPIRED
+}
+
+enum SubscriptionTier {
+  TRIAL
+  BASIC
+  BUSY
+  ENTERPRISE
 }

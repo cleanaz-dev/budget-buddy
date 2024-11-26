@@ -25,9 +25,9 @@ import { Button } from "./ui/button";
 
 const menuNav = [
  { label: "Home", href: "/home", icon: <HomeIcon /> },
- { label: "Settings", href: "/settings", icon: <Settings2Icon /> },
  { label: "AI", href: "/data", icon: <AtomIcon /> },
  { label: "Archive", href: "/archive", icon: <BookHeart /> },
+ { label: "Settings", href: "/settings", icon: <Settings2Icon /> },
 ];
 export default function Topnav() {
   return (
@@ -40,7 +40,7 @@ export default function Topnav() {
         <div>
           <Sheet>
             <SheetTrigger>
-              <Button size="icon" variant="secondary" asChild>
+              <Button size="icon" variant="secondary" className="hover:bg-slate-600 hover:text-green-400 transition-colors duration-300" asChild>
                 <MenuIcon className="text-slate-300 p-1" />
               </Button>
             </SheetTrigger>
